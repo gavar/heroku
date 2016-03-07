@@ -1,10 +1,8 @@
 var React = require('react');
 var NoteList = require('./NoteList');
 var SubmitNote = require('./SubmitNote');
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var Home = React.createClass({
-    mixins: [LinkedStateMixin],
     getInitialState: function () {
         return {
             notes: []
