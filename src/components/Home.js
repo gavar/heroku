@@ -5,7 +5,8 @@ var SubmitNote = require('./SubmitNote');
 var Home = React.createClass({
     getInitialState: function () {
         return {
-            notes: []
+            notes: [],
+            isNewNote: undefined
         }
     },
     componentDidMount: function () {
@@ -27,14 +28,19 @@ var Home = React.createClass({
             method: 'POST',
             url: this.baseURL + "/submit-note?note=" + note
         }).done(function (response) {
-            console.log(response);
+            $this.setState(function (state) { state.isNewNote = response; });
             $this.fetchNotes();
         });
     },
     render: function () {
+
+        var titleText = "Submit Your Note";
+        var isNewNote = this.state.isNewNote;
+        if (isNewNote !== undefined) titleText += ": " + isNewNote + "!";
+
         return (
             <div className="note-container">
-                <h2>Submit Yout Note</h2>
+                <h2>{titleText}</h2>
                 <SubmitNote onSubmit={this.submitNote}/>
                 <NoteList notes={this.state.notes}/>
             </div>
