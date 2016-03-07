@@ -9,11 +9,27 @@ var Home = React.createClass({
         }
     },
     componentDidMount: function () {
-
+        this.baseURL = location.protocol + "//" + location.host;
+        this.fetchNotes();
+    },
+    fetchNotes: function () {
+        let $this = this;
+        $.ajax({
+            method: 'GET',
+            url: this.baseURL + "/get-notes"
+        }).done(function (response) {
+            $this.setState(function (state) { state.notes = response; });
+        });
     },
     submitNote: function (note) {
-        this.setState(function (state) { state.notes.push(note); });
-        console.log("Submit: ", note, " Count: ", this.state.notes.length);
+        let $this = this;
+        $.ajax({
+            method: 'POST',
+            url: this.baseURL + "/submit-note?note=" + note
+        }).done(function (response) {
+            console.log(response);
+            $this.fetchNotes();
+        });
     },
     render: function () {
         return (
