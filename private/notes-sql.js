@@ -11,7 +11,7 @@ connection.connect();
 
 var Notes = {
     getNotes: function (callback) {
-        connection.query("SELECT note FROM notes ORDER BY timestamp DESC", function (err, rows, field) {
+        connection.query("SELECT note FROM notes ORDER BY timestamp DESC LIMIT 50", function (err, rows, field) {
             callback(rows);
         })
     },
