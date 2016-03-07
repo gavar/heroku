@@ -1,0 +1,11 @@
+.note-container {
+    margin-top: 100px;
+}
+
+.note-list {
+    margin-top: 20px;
+}
+
+.note-list li {
+    min-height: 42px;
+}
